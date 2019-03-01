@@ -6,14 +6,18 @@
 #    By: spuisais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 14:50:04 by spuisais          #+#    #+#              #
-#    Updated: 2019/02/19 15:53:49 by spuisais         ###   ########.fr        #
+#    Updated: 2019/03/01 17:36:34 by spuisais         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =	fdf
 
-CS =	src/main.c \
-		src/bresenham.c
+CS =	src/main.c			\
+		src/bresenham.c		\
+		src/iso_view.c		\
+		src/persp_view.c	\
+		src/utils.c			\
+		src/inputs.c		\
 
 OS = $(CS:.c=.o)
 
@@ -27,7 +31,7 @@ all: $(NAME)
 
 $(NAME): $(OS)
 	@make -C libft all
-	@gcc $(CFLAGS) $(IFLAGS) $(LFLAGS) -o $(NAME) src/main.o src/bresenham.o libft/libft.a
+	@gcc $(CFLAGS) $(IFLAGS) $(LFLAGS) -o $(NAME) $(OS) libft/libft.a
 	@echo "Compilation FDF OK."
 
 clean:

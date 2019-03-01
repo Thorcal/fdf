@@ -6,7 +6,7 @@
 /*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 15:44:56 by spuisais          #+#    #+#             */
-/*   Updated: 2019/02/25 16:09:54 by spuisais         ###   ########.fr       */
+/*   Updated: 2019/03/01 14:29:06 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ft_abs(int i)
 	return (i);
 }
 
-static void	ft_horizontal(t_point a, t_point b, t_env env, int color)
+static void	ft_horizontal(t_point a, t_point b, t_env *env, int color)
 {
 	int xinc;
 	int yinc;
@@ -34,7 +34,7 @@ static void	ft_horizontal(t_point a, t_point b, t_env env, int color)
 	while (i <= b.y)
 	{
 		if ((a.x >= 0 && a.x < WIDTH) && (a.y >= 0 && a.y < HEIGHT))
-			mlx_pixel_put(env.mlx_ptr, env.win_ptr, a.x, a.y, color);
+			ft_pixel_put(env, a, color);
 		cumul += b.x;
 		if (cumul >= b.y)
 		{
@@ -46,7 +46,7 @@ static void	ft_horizontal(t_point a, t_point b, t_env env, int color)
 	}
 }
 
-static void	ft_vertical(t_point a, t_point b, t_env env, int color)
+static void	ft_vertical(t_point a, t_point b, t_env *env, int color)
 {
 	int xinc;
 	int yinc;
@@ -62,7 +62,7 @@ static void	ft_vertical(t_point a, t_point b, t_env env, int color)
 	while (i <= b.x)
 	{
 		if ((a.x >= 0 && a.x < WIDTH) && (a.y >= 0 && a.y < HEIGHT))
-			mlx_pixel_put(env.mlx_ptr, env.win_ptr, a.x, a.y, color);
+			ft_pixel_put(env, a, color);
 		cumul += b.y;
 		if (cumul >= b.x)
 		{
@@ -74,7 +74,7 @@ static void	ft_vertical(t_point a, t_point b, t_env env, int color)
 	}
 }
 
-void		ft_bresenham(t_env env, t_point a, t_point b, int color)
+void		ft_bresenham(t_env *env, t_point a, t_point b, int color)
 {
 	b.x = b.x - a.x;
 	b.y = b.y - a.y;
