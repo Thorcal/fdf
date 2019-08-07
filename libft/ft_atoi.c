@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 16:43:32 by spuisais          #+#    #+#             */
-/*   Updated: 2018/11/13 17:50:01 by spuisais         ###   ########.fr       */
+/*   Updated: 2019/04/01 15:56:06 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ int		ft_atoi(const char *str)
 	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\t' || str[i] == '\n'
 	|| str[i] == '\r' || str[i] == '\v')
 		i++;
-	if (str[i] == '-')
-		negative = -1;
-	if (str[i] == '-' || str[i] == '+')
+	while (str[i] == '-' || str[i] == '+')
+	{
+		negative *= str[i] == '-' ? -1 : 1;
 		i++;
+	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		number *= 10;

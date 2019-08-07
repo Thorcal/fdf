@@ -6,7 +6,7 @@
 /*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:01:32 by spuisais          #+#    #+#             */
-/*   Updated: 2019/03/01 18:01:14 by spuisais         ###   ########.fr       */
+/*   Updated: 2019/03/25 15:04:11 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	create_iso_grid(t_env *env)
 	t_point	s;
 	t_point	p;
 
-	p.y = 0;
-	while (p.y < env->map_size.y)
+	p.y = -1;
+	while (++p.y < env->map_size.y)
 	{
 		p.x = 0;
 		while (p.x < env->map_size.x)
@@ -59,7 +59,6 @@ void	create_iso_grid(t_env *env)
 				draw_iso_line(env, s, p, 'y');
 		}
 		s.y += env->size.y;
-		p.y++;
 	}
 	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->image, 0, 0);
 	init_hud(env);

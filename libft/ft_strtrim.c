@@ -6,12 +6,11 @@
 /*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 11:02:08 by spuisais          #+#    #+#             */
-/*   Updated: 2018/11/27 16:10:01 by spuisais         ###   ########.fr       */
+/*   Updated: 2019/04/01 13:26:16 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 char	*ft_strtrim(char const *s)
 {

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   persp_view.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:01:44 by spuisais          #+#    #+#             */
-/*   Updated: 2019/03/01 17:50:17 by spuisais         ###   ########.fr       */
+/*   Updated: 2019/04/01 14:50:42 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-#include <stdio.h>
 
 static void	draw_line(t_env *env, t_point start, t_point coor, char dir)
 {

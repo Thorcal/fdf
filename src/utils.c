@@ -6,11 +6,29 @@
 /*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:10:18 by spuisais          #+#    #+#             */
-/*   Updated: 2019/03/01 17:49:49 by spuisais         ###   ########.fr       */
+/*   Updated: 2019/04/01 14:41:19 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+#include "../libft/get_next_line.h"
+
+void	free_stuff(char **map, char ***tmp, char **line, int size)
+{
+	int i;
+
+	i = 0;
+	if (*line)
+		free(*line);
+	if (*map)
+		free(*map);
+	if (*tmp)
+	{
+		while (i < size)
+			free((*tmp)[i++]);
+		free(*tmp);
+	}
+}
 
 int		get_map_size(char **map)
 {
@@ -22,24 +40,6 @@ int		get_map_size(char **map)
 	return (x);
 }
 
-void	init_hud(t_env *env)
-{
-	mlx_string_put(env->mlx_ptr, env->win_ptr,
-			5, 5, 0xFFFFFF, "Esc            : Quit");
-	mlx_string_put(env->mlx_ptr, env->win_ptr,
-			5, 20, 0xFFFFFF, "WASD/Arrow Keys: Move");
-	mlx_string_put(env->mlx_ptr, env->win_ptr,
-			5, 35, 0xFFFFFF, "Scroll up/+    : Zoom in");
-	mlx_string_put(env->mlx_ptr, env->win_ptr,
-			5, 50, 0xFFFFFF, "Scroll down/-  : Zoom out");
-	mlx_string_put(env->mlx_ptr, env->win_ptr,
-			5, 65, 0xFFFFFF, "1/2            : Change Height");
-	mlx_string_put(env->mlx_ptr, env->win_ptr,
-			5, 80, 0xFFFFFF, "I              : Isometric view");
-	mlx_string_put(env->mlx_ptr, env->win_ptr,
-			5, 95, 0xFFFFFF, "P              : Parallel view");
-}
-
 int		pick_color(int height1, int height2)
 {
 	int	color;
@@ -47,7 +47,7 @@ int		pick_color(int height1, int height2)
 	if (height1 <= 0 && height2 <= 0)
 		color = 0x5a8ee2;
 	else if (height1 <= 10 && height2 <= 10)
-		color = 0x78e25a;
+		color = 0x84e866;
 	else if (height1 <= 20 && height2 <= 20)
 		color = 0xf2ca48;
 	else if (height1 <= 30 && height2 <= 30)
@@ -63,4 +63,20 @@ int		pick_color(int height1, int height2)
 	else
 		color = 0xFFFFFF;
 	return (color);
+}
+
+int		red_cross(t_env *env)
+{
+	mlx_destroy_window(env->mlx_ptr, env->win_ptr);
+	exit(0);
+}
+
+int		check_chars(int fd, char **line, char **map, char ***tmp)
+{
+	if (!(get_next_line(fd, line) > 0))
+		return (-1);
+	check_line(*line);
+	if (secure_dup_and_split(line, map, tmp) == -1)
+		return (-1);
+	return (0);
 }

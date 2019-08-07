@@ -6,11 +6,21 @@
 /*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 15:44:56 by spuisais          #+#    #+#             */
-/*   Updated: 2019/03/01 14:29:06 by spuisais         ###   ########.fr       */
+/*   Updated: 2019/03/19 15:08:32 by spuisais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+
+int			compare_and_close(int i, int j, int fd)
+{
+	if (i != j)
+	{
+		close(fd);
+		return (-1);
+	}
+	return (0);
+}
 
 static int	ft_abs(int i)
 {
@@ -33,7 +43,7 @@ static void	ft_horizontal(t_point a, t_point b, t_env *env, int color)
 	i = 0;
 	while (i <= b.y)
 	{
-		if ((a.x >= 0 && a.x < WIDTH) && (a.y >= 0 && a.y < HEIGHT))
+		if ((a.x >= 0 && a.x < env->width) && (a.y >= 0 && a.y < env->height))
 			ft_pixel_put(env, a, color);
 		cumul += b.x;
 		if (cumul >= b.y)
@@ -61,7 +71,7 @@ static void	ft_vertical(t_point a, t_point b, t_env *env, int color)
 	i = 0;
 	while (i <= b.x)
 	{
-		if ((a.x >= 0 && a.x < WIDTH) && (a.y >= 0 && a.y < HEIGHT))
+		if ((a.x >= 0 && a.x < env->width) && (a.y >= 0 && a.y < env->height))
 			ft_pixel_put(env, a, color);
 		cumul += b.y;
 		if (cumul >= b.x)
